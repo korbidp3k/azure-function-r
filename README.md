@@ -1,6 +1,6 @@
 # Running R scripts on Azure Function
 
-In this tutorial we will show how to deploy a script that post daily to twitter the temperature forecast for the next 5 days for a given city.
+In this tutorial we will show how to deploy a script that posts daily to Twitter the temperature forecast for the next 5 days for a given city.
 
 ![](./media/00_tweet.PNG)
 
@@ -32,7 +32,7 @@ Azure Function can be used in several scenarios because of the broad choice of t
 4. When the site is back online you can test that R has been properly installed by running `Rscript --help` in the kudu powershell debug console.
 ![](./media/5_successful_deployment.PNG)
 
-## Running a R script on Azure Function
+## Running any R script on Azure Function
 
 1. You only need to create an Azure Function and call Rscript.exe from powershell. All you need is a R script `script.r` for example, and have a `run.ps1` similar to this:
 
@@ -41,11 +41,11 @@ cd D:\home\site\wwwroot\YourFunctionName
 D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 ```
 
-## Running the Azure Function with the temperature forecast twitter bot
+## Setting up the temperature forecast Twitter bot
 
 **/!\\** Due to a limitation of the low-level graphics libraries of the Azure Function environment, generating the graph requires a **Hosted Plan**, the bot only tweets text on the **Consumption Plan** **/!\\**
 
-1. This repository contains the code for an Azure Function that post to [twitter the temperature forecast for the next 5 days in London](https://twitter.com/thdelteil). The first thing to do is to enable continuous deployment on the function. ![](./media/4_deployment.PNG)
+1. This current repository contains the code for an Azure Function that post to [twitter the temperature forecast for the next 5 days in London](https://twitter.com/thdelteil). The first thing to do is to enable continuous deployment on the function. ![](./media/4_deployment.PNG)
 
 2. You can select external repository and set the address to this repository `https://github.com/thdeltei/azure-function-r` and branch `release-1.0`
 
@@ -71,11 +71,13 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 
 ### Executing the function
 
-1. Click `Run` on the portal ![](./media/9_run_the_function.PNG)
+1. Click `Run` on the portal
+ ![](./media/9_run_the_function.PNG)
 
 2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan.
 
-3. Enjoy the temperature forecast: ![](./media/00_tweet.PNG)
+3. Enjoy the temperature forecast:
+ ![](./media/00_tweet.PNG)
 
 
 ### Going further
