@@ -17,12 +17,13 @@ library('ggplot2')
 
 # Getting the weather data ------------------------------------------------------------------
 
-credentials <- fromJSON(file='credentials.json')
-weather_api_key <- credentials$openweathermap$key
+credentials_file = "credentials.json"
+credentials <- fromJSON(file=credentials_file)
+key <- credentials$openweathermap$key
 city <- "London"
 country <- "GB"
 
-url_api <- paste0("http://api.openweathermap.org/data/2.5/forecast?q=", city, ",", country,"&APPID=", api_key)
+url_api <- paste0("http://api.openweathermap.org/data/2.5/forecast?q=", city, ",", country,"&APPID=", key)
 
 res <- content(GET(url_api))
 
@@ -55,7 +56,6 @@ p<-ggplot(dat, aes(x=dt, y=temp, colour=temp)) +
   geom_smooth(method = "loess", span=0.25, colour=NA, fill="grey80" ) +
   scale_color_continuous(low="blue", high="red", limits=c(-10, 50), guide=FALSE)
 
-
 # Export to file ------------------------------------------------------------------
 
 # Printing to SVG first and then converting to PNG because of graphics driver issues
@@ -65,17 +65,24 @@ print(p)
 dev.off()
 plot_file_png <- tempfile(fileext = ".png")
 rsvg_png(plot_file, plot_file_png)
+
 #  ------------------------------------------------------------------------
 
 # Posting to twitter ------------------------------------------------------------------
 
-credentials <- fromJSON(file='credentials.json')
+credentials <- fromJSON(file=credentials_file)
 ckey <- credentials$twitter$consumer_key
 csecret <- credentials$twitter$consumer_secret
 atoken <- credentials$twitter$access_token
 asecret <- credentials$twitter$access_secret
 
 setup_twitter_oauth(ckey, csecret, atoken, asecret)
-tweet(paste0("Install R on Azure Function https://www.siteextensions.net/packages/R-3.3.3x64/"), mediaPath = plot_file_png)
+if (Sys.getenv('WEBSITE_COMPUTE_MODE') == 'Dynamic') {
+  # The graphics libraries on the consumption mode are not available
+  # so you cannot generate a graph
+  tweet(paste("The temperature in", city, "is", dat$temp[1], "degrees Celcius.", "Use R on Azure Function https://github.com/thdeltei/azure-function-r"))  
+} else {
+  tweet(paste("The temperature in", city, "is", dat$temp[1], "degrees Celcius.", "Use R on Azure Function https://github.com/thdeltei/azure-function-r"), mediaPath = plot_file_png)
+}
 
 #  ------------------------------------------------------------------------
