@@ -1,6 +1,6 @@
 # Running R scripts on Azure Function
 
-In this tutorial we will show how to deploy a script that posts daily to Twitter the temperature forecast for the next 5 days for a given city.
+In this tutorial we will show how to deploy a R script on Azure Function that posts daily to Twitter the temperature forecast for the next 5 days. See it in action [here](https://twitter.com/thdelteil)
 
 ![](./media/00_tweet.PNG)
 
