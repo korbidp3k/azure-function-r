@@ -15,7 +15,7 @@ Azure Function can be used in several scenarios because of the broad choice of t
 
 ## Creating an Azure Function
 
-1. Make sure you have an Azure Subscription and that you are logged in the [portal](!https://ms.portal.azure.com)
+1. Make sure you have an Azure Subscription and that you are logged in the [Azure Portal](https://ms.portal.azure.com)
 
 2. Navigate to the [Function creation wizard](https://ms.portal.azure.com/#create/Microsoft.FunctionApp).
 
