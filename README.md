@@ -72,11 +72,13 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 ### Executing the function
 
 1. Click `Run` on the portal
+
  ![](./media/9_run_the_function.PNG)
 
 2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan.
 
 3. Enjoy the temperature forecast:
+
  ![](./media/00_tweet.PNG)
 
 
