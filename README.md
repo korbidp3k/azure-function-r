@@ -1,6 +1,6 @@
 # Running R scripts on Azure Function
 
-In this tutorial we will show how to deploy a R script on Azure Function that posts daily to Twitter the temperature forecast for the next 5 days. See it in action [here](https://twitter.com/thdelteil)
+In this tutorial we will show how to deploy a R script on Azure Function. To illustrate that we take the example of a bot that posts daily to Twitter the temperature forecast for the next 5 days. See it in action [here](https://twitter.com/thdelteil)
 
 ![](./media/00_tweet.PNG)
 
@@ -25,14 +25,15 @@ Azure Function can be used in several scenarios because of the broad choice of t
 
 1. Once you have your Azure Function set up, navigate to the Kudu Console of the function. ![](./media/1_kudu_console.PNG)
 
-2. Navigate to the site extension tab, search for **Rscript** and install the **R 3.3.3 x64** extension. It can take up to 5 minutes to install on the slower plans. ![](./media/2_install_extension.PNG). You might get a `installation failed` pop-up message. Refresh the page and navigate to the `installed` tab. You should see the R extension there.
+2. Navigate to the site extension tab, search for **Rscript** and install the **R 3.3.3 x64** extension. It can take up to 5 minutes to install on the slower plans. ![](./media/2_install_extension.PNG) Once the installation in completed, you might get a `installation failed` pop-up message, ignore it. Refresh the page and navigate to the `installed` tab. You should see the R extension there.
+
 
 3. Once the extension is installed, click on **Restart Site** ![](./media/3_restart.PNG)
 
 4. When the site is back online you can test that R has been properly installed by running `Rscript --help` in the kudu powershell debug console.
 ![](./media/5_successful_deployment.PNG)
 
-## Running any R script on Azure Function
+## Running any R scripts on Azure Function
 
 1. You only need to create an Azure Function and call Rscript.exe from powershell. All you need is a R script `script.r` for example, and have a `run.ps1` similar to this:
 
@@ -79,7 +80,7 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 
  ![](./media/9_run_the_function.PNG)
 
-2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan.
+2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan. Sometimes you even reach the 5 minutes limit (on the consumption plan), in that case run again the function and it will continue the installation of the packages where it left it.
 
 3. Enjoy the temperature forecast:
 
