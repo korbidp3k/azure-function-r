@@ -45,7 +45,11 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 
 **/!\\** Due to a limitation of the low-level graphics libraries of the Azure Function environment, generating the graph requires a **Hosted Plan**, the bot only tweets text on the **Consumption Plan** **/!\\**
 
-1. This current repository contains the code for an Azure Function that post to [twitter the temperature forecast for the next 5 days in London](https://twitter.com/thdelteil). The first thing to do is to enable continuous deployment on the function. ![](./media/4_deployment.PNG)
+1. This current repository contains the code for an Azure Function that post to [twitter the temperature forecast for the next 5 days in London](https://twitter.com/thdelteil). The first thing to do is to enable continuous deployment on the function. 
+
+![](./media/41_deployment.PNG)
+
+![](./media/4_deployment.PNG)
 
 2. You can select external repository and set the address to this repository `https://github.com/thdeltei/azure-function-r` and branch `release-1.0`
 
