@@ -33,6 +33,34 @@ Azure Function can be used in several scenarios because of the broad choice of t
 4. When the site is back online you can test that R has been properly installed by running `Rscript --help` in the kudu powershell debug console.
 ![](./media/5_successful_deployment.PNG)
 
+5. To make sure the installation is complete **run the following command** and wait until completion (this can take up to ~10 min on consumption plan):
+
+```ps
+unzip -n D:\home\SiteExtensions\R-3.3.3x64\R-3.3.3.zip -d D:\home
+```
+
+Sometimes the installation times-out and fails to complete, especially on the consumption plan. This is being investigated. If you don't run the above command you might encounter a similar error as the following:
+
+```
+2017-08-02T07:46:06  Welcome, you are now connected to log-streaming service.
+2017-08-02T07:46:10.787 Function started (Id=56a4dde7-e44b-4fa7-8820-686b381fb341)
+2017-08-02T07:46:14.230 During startup - Warning messages:
+2017-08-02T07:46:14.230 1: package 'utils' in options("defaultPackages") was not found
+2017-08-02T07:46:14.230 2: package 'grDevices' in options("defaultPackages") was not found
+2017-08-02T07:46:14.230 3: package 'graphics' in options("defaultPackages") was not found
+2017-08-02T07:46:14.230 4: package 'stats' in options("defaultPackages") was not found
+2017-08-02T07:46:14.277 Loading required package: httr
+2017-08-02T07:46:14.293 Error: could not find function "install.packages"
+2017-08-02T07:46:14.293 In addition:
+2017-08-02T07:46:14.293 Warning message:
+2017-08-02T07:46:14.293 In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+2017-08-02T07:46:14.293 
+2017-08-02T07:46:14.293 there is no package called 'httr'
+2017-08-02T07:46:14.308 Execution halted
+2017-08-02T07:46:14.324 Function completed (Success, Id=56a4dde7-e44b-4fa7-8820-686b381fb341, Duration=3545ms)
+```
+
+
 ## Running any R scripts on Azure Function
 
 1. You only need to create an Azure Function and call Rscript.exe from powershell. All you need is a R script `script.r` for example, and have a `run.ps1` similar to this:
@@ -41,6 +69,7 @@ Azure Function can be used in several scenarios because of the broad choice of t
 cd D:\home\site\wwwroot\YourFunctionName
 D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 ```
+
 
 ## Setting up the temperature forecast Twitter bot
 
@@ -81,6 +110,7 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
  ![](./media/9_run_the_function.PNG)
 
 2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan. Sometimes you even reach the 5 minutes limit (on the consumption plan), in that case run again the function and it will continue the installation of the packages where it left it.
+
 
 3. Enjoy the temperature forecast:
 
