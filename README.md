@@ -33,7 +33,7 @@ Azure Function can be used in several scenarios because of the broad choice of t
 4. When the site is back online you can test that R has been properly installed by running `Rscript --help` in the kudu powershell debug console.
 ![](./media/5_successful_deployment.PNG)
 
-5. To make sure the installation is complete **run the following command** and wait until completion (this can take up to ~10 min on consumption plan):
+5. To make sure the installation is complete **run the following command** in the powershell kudu console and wait until completion (this can take up to ~10 min on consumption plan):
 
 ```ps
 unzip -n D:\home\SiteExtensions\R-3.3.3x64\R-3.3.3.zip -d D:\home
