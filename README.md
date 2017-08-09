@@ -1,12 +1,12 @@
-# Running R scripts on Azure Function
+> This is a minimal fork that gets you to running a simple R Hello World application on Azure Functions. For a more extensive example, please check out the upstream repository.
 
-In this tutorial we will show how to deploy a R script on Azure Function. To illustrate that we take the example of a bot that posts daily to Twitter the temperature forecast for the next 5 days. See it in action [here](https://twitter.com/thdelteil)
+# Running R scripts on Azure Functions
 
-![](./media/00_tweet.PNG)
+In this tutorial we will show how to deploy a R script on Azure Function.
 
-## Azure Function
+## Azure Functions
 
-[Azure Function](https://azure.microsoft.com/en-us/services/functions/) supports a variety of languages (C#, js, batch, PowerShell, Python). However R is not natively supported, in the following tutorial we will show how to run R scripts on Azure Function.
+[Azure Functions](https://azure.microsoft.com/en-us/services/functions/) supports a variety of languages (C#, js, batch, PowerShell, Python). However R is not natively supported, in the following tutorial we will show how to run R scripts on Azure Function.
 
 Azure Function can be used in several scenarios because of the broad choice of triggers it offers:
 - Timer trigger, executes a Function on a schedule.
@@ -60,7 +60,6 @@ Sometimes the installation times-out and fails to complete, especially on the co
 2017-08-02T07:46:14.324 Function completed (Success, Id=56a4dde7-e44b-4fa7-8820-686b381fb341, Duration=3545ms)
 ```
 
-
 ## Running any R scripts on Azure Function
 
 1. You only need to create an Azure Function and call Rscript.exe from powershell. All you need is a R script `script.r` for example, and have a `run.ps1` similar to this:
@@ -71,17 +70,15 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 ```
 
 
-## Setting up the temperature forecast Twitter bot
+## Setting up the Hello World bot
 
-**/!\\** Due to a limitation of the low-level graphics libraries of the Azure Function environment, generating the graph requires a **Hosted Plan**, the bot only tweets text on the **Consumption Plan** **/!\\**
-
-1. This current repository contains the code for an Azure Function that post to [twitter the temperature forecast for the next 5 days in London](https://twitter.com/thdelteil). The first thing to do is to enable continuous deployment on the function. 
+1. This current repository contains the code for an Azure Function that prints a hello world message that can be seen in the logs. The first thing to do is to enable continuous deployment on the function. 
 
 ![](./media/41_deployment.PNG)
 
 ![](./media/4_deployment.PNG)
 
-2. You can select external repository and set the address to this repository `https://github.com/thdeltei/azure-function-r` and branch `release-1.0`
+2. You can select external repository and set the address to this repository `https://github.com/vitoc/azure-function-r` and branch `master`
 
 3. Click on `sync` and refresh the page. You should see the code in your Azure Function. 
 
@@ -92,40 +89,13 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
     ```
     This powershell script change the directory to the `script` directory of this repository and execute the R script while redirecting the stderr to stdout.
 
-### Setting up the keys
+## Setting up the Hello World bot
 
-1. In order to use the `script.r` file that gets the temperature from the [Open Weather API](https://openweathermap.org/api) and post it to twitter you need:
-    - An open weather API key and subscribe to the forecast API. ![](./media/6_weather_api.PNG)
-    ![](./media/61_weather_key.PNG)
-    - A [twitter developer account](https://dev.twitter.com/), create an App and get the consumer key and secret and a dev access token and secret 
-    ![](./media/7_twitter_keys.PNG)
-
-2. Once you have that you need to edit the `credentials.json` file on your Azure Function with the right values. You can use the `App Service Editor` for that. ![](./media/8_app_service_editor.PNG)
-![](./media/81_app_service_editor_json.PNG)
-
-### Executing the function
-
-1. Click `Run` on the portal
-
- ![](./media/9_run_the_function.PNG)
-
-2. The first time around, the packages are going to be installed and this can take some time (3-4 min), especially on the consumption plan. Sometimes you even reach the 5 minutes limit (on the consumption plan), in that case run again the function and it will continue the installation of the packages where it left it.
-
-
-3. Enjoy the temperature forecast:
-
- ![](./media/00_tweet.PNG)
-
-
-### Going further
-
-You can make this bot more complex by using an HTTP trigger, reading query string arguments from the environment variables in the R script for example to let the user specify the city and country to generate the forecast for.
+1. When you're done, click `Run` on the portal and you should see `Hello, World!` printed in the logs.
 
 ### Limitations
 
 The more complex use cases would need some a bit more powershell scripting for example to return an JSON HTTP response, but it consists only of redirecting the stdout of the R process to the normal powershell commands.
-
-The consumption plan has some limitations in terms of graphical libraries that are available. If you find a way around it, let me know! On the hosted plan, vector graphic libraries can be used (svg for e.g) and then converted to .png.
 
 ### Acknowledgements
 
