@@ -76,8 +76,6 @@ D:\home\R-3.3.3\bin\x64\Rscript.exe script.r 2>&1
 
 ![](./media/41_deployment.PNG)
 
-![](./media/4_deployment.PNG)
-
 2. You can select external repository and set the address to this repository `https://github.com/vitoc/azure-function-r` and branch `master`
 
 3. Click on `sync` and refresh the page. You should see the code in your Azure Function. 
