@@ -8,12 +8,15 @@ if (!require('ggplot2')) install.packages('ggplot2')
 if (!require('twitteR')) install.packages("twitteR")
 if (!require('rsvg')) install.packages("rsvg")
 if (!require('rjson')) install.packages("rjson")
+if (!require('xml2')) install.packages("xml2")
+
 library('rjson')
 library('rsvg')
 library('twitteR')
 library('httr')
 library('jsonlite')
 library('ggplot2')
+library('xml2')
 
 # Getting the weather data ------------------------------------------------------------------
 
